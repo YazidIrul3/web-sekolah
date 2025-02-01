@@ -13,6 +13,18 @@ const findLatestNews = async (limit = 0) => {
   await newsModel.find().sort("date").limit(limit);
 };
 
+const findNewsByCategory = async (category) => {
+  await newsModel.find({ category: category });
+};
+
+const findConfimationNews = async (category) => {
+  await newsModel.find({ status: "confirm" });
+};
+
+const findPendingNews = async () => {
+  await newsModel.find({ status: "pending" });
+};
+
 const createNews = async (news) => {
   const newNews = new newsModel(news);
 
@@ -31,7 +43,10 @@ module.exports = {
   findAllNews,
   findDetailNews,
   findLatestNews,
+  findPendingNews,
+  findConfimationNews,
+  findDeletedNews,
+  findNewsByCategory,
   createNews,
   editNews,
-  findDeletedNews,
 };
